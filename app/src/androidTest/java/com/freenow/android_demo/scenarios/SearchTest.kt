@@ -5,20 +5,20 @@ import androidx.test.rule.GrantPermissionRule
 import com.freenow.android_demo.activities.MainActivity
 import com.freenow.android_demo.models.TestUser
 import com.freenow.android_demo.network.fetchUser
-import com.freenow.android_demo.screens.LoginScreen
-import com.freenow.android_demo.screens.NavigationMenu
 import com.freenow.android_demo.rules.TestRuleComposer
-import com.freenow.android_demo.utils.clearPrefs
+import com.freenow.android_demo.screens.DriversProfileScreen
+import com.freenow.android_demo.screens.MainScreen
+import com.freenow.android_demo.utils.saveTestersPrefs
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 
-class LoginTest{
+class SearchTest {
     lateinit var tester: TestUser
 
     private val testSetupRule = TestRuleComposer(MainActivity::class.java).with {
-        clearPrefs()
         tester = fetchUser()
+        saveTestersPrefs(tester)
     }
 
     private val permissionsRule = GrantPermissionRule.grant(
@@ -30,27 +30,18 @@ class LoginTest{
         .around(testSetupRule)
 
     @Test
-    fun successfulLoginTest(){
-        LoginScreen.enterCredetials(tester.username,tester.password)
-        LoginScreen.loginButton.click()
-        NavigationMenu.openNavigationMenu()
+    fun searchDriverTest(){
+        val testQuery = "sa"
+        val expectedResult = "Samantha Reed"
 
-        NavigationMenu.hasUsername(tester.username)
-    }
+        MainScreen.searchFor(testQuery)
+        MainScreen.clickOnItem(expectedResult)
 
-    @Test
-    fun invalidCredentialsLoginTest(){
-        //Blank credentials
-        LoginScreen.loginButton.click()
+        DriversProfileScreen.hasName(expectedResult)
 
-        LoginScreen.hasErrorMessage()
+        DriversProfileScreen.callToDriver()
 
-        LoginScreen.enterCredetials(tester.username,"")
+        DriversProfileScreen.hasDialerIntent()
 
-        LoginScreen.hasErrorMessage()
-
-        LoginScreen.enterCredetials("",tester.password)
-
-        LoginScreen.hasErrorMessage()
     }
 }

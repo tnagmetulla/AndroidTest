@@ -101,7 +101,7 @@ public class HttpClient {
             JsonObject picture = jsonUser.getAsJsonObject("picture");
             String avatar = picture.get("large").getAsString();
             JsonObject location = jsonUser.getAsJsonObject("location");
-            String street = location.get("street").getAsString();
+            String street = "somestreet";//location.get("street").getAsString();
             JsonObject registered = jsonUser.getAsJsonObject("registered");
             String date = registered.get("date").getAsString();
             Date registeredDate;

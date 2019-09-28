@@ -1,9 +1,10 @@
 package com.freenow.android_demo.rules
 
 import android.app.Activity
+import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.rule.ActivityTestRule
 
-class TestRuleComposer<T : Activity>(activityClass: Class<T>) : ActivityTestRule<T>(activityClass) {
+class TestRuleComposer<T : Activity>(activityClass: Class<T>) : IntentsTestRule<T>(activityClass) {
     private val operations = mutableListOf<() -> Unit>()
 
     override fun beforeActivityLaunched() {
