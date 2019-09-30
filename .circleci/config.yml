@@ -40,6 +40,7 @@ jobs:
           command: |
             sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            sudo gcloud auth login
       - run:
           name: Configure environment
           command: |
