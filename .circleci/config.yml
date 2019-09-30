@@ -36,13 +36,13 @@ jobs:
           name: Dump Google Cloud Credentials to file
           command: echo ${GOOGLE_AUTH} > ${HOME}/gcloud-service-key.json
       run:
-        name: Authorize gcloud and set config defaults
-        command: |
+          name: Authorize gcloud and set config defaults
+          command: |
           sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
           sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - run:
-        name: Test with Firebase Test Lab
-        command: >
+          name: Test with Firebase Test Lab
+          command: >
           sudo gcloud firebase test android run \
           --app app/build/outputs/apk/debug/app-debug.apk \
           --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
