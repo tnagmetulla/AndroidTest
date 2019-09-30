@@ -2,8 +2,8 @@
 Test project with Kotlin, Espresso, Kakao and CircleCI
 
 What I have done:
--UI tests implemented from scratch( 2 tests for Login, 1 test for the Search)
--Config.yml file created to Run tests on CircleCI + Firebase Test Lab
+- UI tests implemented from scratch( 2 tests for Login, 1 test for the Search)
+- Config.yml file created to Run tests on CircleCI + Firebase Test Lab
 
 UX/UI Issues/Recommendations | Demo App:
 - There is no network outage handling, e.g. Login Screen needs some messages if user tries to login without internet connection.
